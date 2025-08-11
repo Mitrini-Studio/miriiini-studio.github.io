@@ -1,1 +1,1 @@
-# miriiini-studio.github.io
+# miriiini.github.io
