@@ -1,0 +1,11 @@
+/* Styles pour la page des paramètres */
+.spa-settings-wrapper {
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+}
+
+.spa-settings-wrapper .page-title {
+  color: #333;
+  text-align: center;
+}

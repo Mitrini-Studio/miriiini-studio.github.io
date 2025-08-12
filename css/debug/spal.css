@@ -1,0 +1,10 @@
+    * {
+      user-select: none;
+      -webkit-user-drag: none;
+      -webkit-user-select: none;
+    }
+    img, a {
+      pointer-events: auto;
+    }
+
+/* désactiver la sélection de texte et le glisser-déposer d'images  */

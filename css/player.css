@@ -1,0 +1,142 @@
+/* Styles pour le lecteur de musique */
+.music-player {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px; /* Hauteur du lecteur */
+    background-color: var(--secondary-background);
+    border-top: 1px solid var(--border-color);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.music-player.visible {
+    transform: translateY(0);
+}
+
+.player-content {
+    display: flex;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    gap: 20px;
+}
+
+.track-info-player {
+    display: flex;
+    align-items: center;
+    min-width: 250px;
+}
+
+.player-album-cover {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    margin-right: 15px;
+    object-fit: cover;
+}
+
+.track-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.player-track-title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.player-artist-name {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-color-light);
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.player-btn {
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    position: relative;
+}
+
+.player-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.pause-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 300px;
+}
+
+.progress-bar-wrapper {
+    flex-grow: 1;
+    height: 4px;
+    background-color: var(--border-color);
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.progress-bar::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 4px;
+    background: var(--text-color);
+    border-radius: 2px;
+}
+
+.progress-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    margin-top: -3px; /* Centre le "thumb" verticalement */
+}
+
+#current-time, #total-time {
+    font-size: 0.8rem;
+    color: var(--text-color-light);
+    width: 40px;
+    text-align: center;
+}

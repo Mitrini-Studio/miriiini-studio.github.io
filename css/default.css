@@ -1,0 +1,382 @@
+@font-face {
+  font-family: 'Varela Round';
+  src: url('../text/VarelaRound.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+body {
+    margin: 0;
+    font-family: 'Varela Round', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: background-color 0.5s ease, color 0.5s ease;
+    overflow-x: hidden;
+}
+
+/* Supprime l'indicateur bleu au toucher sur les éléments interactifs */
+a, button, .hamburger-menu, .switch, .slider {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Thèmes clair et sombre */
+:root {
+    --background-color: #FFFFFF;
+    --text-color: #0C0C0C;
+    --button: #404c5a; /* Couleur de base pour le bouton en mode clair */
+    --button-gradient-start: rgba(255, 255, 255, 0.05); /* Début du dégradé en mode clair */
+    --button-gradient-middle: rgba(255, 255, 255, 0.2); /* Milieu du dégradé en mode clair */
+    --button-gradient-end: rgba(255, 255, 255, 0.05); /* Fin du dégradé en mode clair */
+}
+
+[data-theme="dark"] {
+    --background-color: #0C0C0C;
+    --text-color: #FFFFFF;
+    --button: black; /* Couleur de base pour le bouton en mode sombre */
+    --button-gradient-start: rgba(0, 0, 0, 0.05); /* Début du dégradé en mode sombre */
+    --button-gradient-middle: rgba(0, 0, 0, 0.2); /* Milieu du dégradé en mode sombre */
+    --button-gradient-end: rgba(0, 0, 0, 0.05); /* Fin du dégradé en mode sombre */
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 50%; /* Position vertically in the middle */
+    transform: translateY(-50%); /* Adjust to truly center vertically */
+    left: -100%;
+    width: 60vw;
+    max-width: 280px;
+    min-width: 200px;
+    background-color: rgba(113, 125, 125, 0.3);
+    color: var(--text-color);
+    border-radius: 50px;
+    padding: 10px 0;
+    transition: left 0.3s ease-in-out;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 15px solid var(--text-color);
+    overflow-y: auto; /* Ensures scrolling if content is too tall */
+    max-height: 96vh; /* Retained to prevent it from exceeding viewport height */
+    box-sizing: border-box;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 14px;
+    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--text-color);
+    border-radius: 20px;
+    transition: background-color 0.3s, transform 0.2s;
+    text-align: center;
+    width: 80%;
+    box-sizing: border-box; /* Ajouté */
+}
+
+.sidebar ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+}
+
+/* Sidebar Image */
+.sidebar-image-container {
+    text-align: left;
+    padding: 10px;
+    box-sizing: border-box; /* Ajouté */
+}
+
+.sidebar-image {
+    width: 10%;
+    margin-right: auto;
+    margin-left: 10px;
+    max-width: 100%; /* Ajouté */
+    height: auto; /* Ajouté */
+}
+
+/* Header */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    backdrop-filter: blur(20px);;
+    color: var(--text-color);
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: background-color 0.5s ease, color 0.5s ease;
+    max-width: 100%; /* Ajouté */
+    box-sizing: border-box; /* Ajouté */
+}
+
+/* User Profile Button */
+.user-profile-button {
+    width: 40px; /* Adjust size as needed */
+    height: 40px; /* Adjust size as needed */
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: #ccc; /* Placeholder background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px; /* Space between profile button and hamburger */
+    border: 2px solid var(--text-color); /* Border based on theme */
+    transition: border-color 0.5s ease; /* Smooth transition for theme change */
+    flex-shrink: 0; /* Prevent it from shrinking */
+}
+
+.user-profile-button img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the circle */
+    display: block; /* Removes extra space below image */
+}
+
+/* Adjustments for right-section to align items */
+header .right-section {
+    display: flex;
+    align-items: center; /* Aligns hamburger and profile button vertically */
+}
+
+/* Media Query for mobile devices: reduce button size */
+@media (max-width: 768px) {
+    .user-profile-button {
+        width: 30px; /* Smaller size for mobile */
+        height: 30px; /* Smaller size for mobile */
+        margin-right: 10px; /* Adjust margin for mobile */
+    }
+}
+
+
+/* Hamburger Menu */
+.hamburger-menu {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.hamburger-menu .line {
+    width: 2rem;
+    height: 0.3rem;
+    background: var(--text-color);
+    border-radius: 0.5rem;
+    transition: background-color 0.5s ease;
+}
+
+.left-section {
+    display: flex; /* Pour aligner le logo verticalement si nécessaire */
+    align-items: center; /* Centre verticalement le contenu */
+}
+
+/* Logo specific styles for dark and light themes */
+.logo {
+    height: 15px; /* Adjust as needed */
+    margin-right: 10px; /* Adjust as needed */
+    /* Default filter for light theme (or when no data-theme is set) */
+    filter: invert(1); /* Inverts colors for a white logo on a light background */
+}
+
+[data-theme="dark"] .logo {
+    filter: invert(0); /* Resets the inversion for dark theme, making the white logo normal */
+}
+
+/* Body */
+.content {
+    display: flex;
+    flex-direction: column; /* Important pour aligner les éléments verticalement */
+    align-items: center; /* Centre les éléments horizontalement */
+    justify-content: center; /* Centre les éléments verticalement dans le conteneur */
+    flex: 1;
+    padding: 20px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.5s ease, color 0.5s ease;
+    text-align: center; /* Centre le texte à l'intérieur de chaque h1 */
+    max-width: 100%; /* Ajouté */
+    box-sizing: border-box; /* Ajouté */
+}
+
+h1,
+p {
+    margin: 0;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Footer */
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 20px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.5s ease, color 0.5s ease;
+    position: relative;
+    max-width: 100%; /* Ajouté */
+    box-sizing: border-box; /* Ajouté */
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+footer .copyright {
+    text-align: center;
+    font-size: 0.5rem;
+    margin-bottom: 10px;
+}
+
+footer .footer-links {
+    text-align: center;
+}
+
+footer .footer-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 0.5rem;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+footer .footer-links a:hover {
+    color: #717D7D;
+}
+
+/* Toggle Theme */
+.toggle-theme {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #D7D7D7;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #FFFFFF;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: #717D7D;
+}
+
+input:checked+.slider:before {
+    transform: translateX(26px);
+}
+
+/* Media Query pour les appareils mobiles: réduction du toggle de 25% */
+@media (max-width: 768px) {
+    .switch {
+        width: 45px; /* 60px * 0.75 = 45px */
+        height: 25.5px; /* 34px * 0.75 = 25.5px */
+    }
+
+    .slider:before {
+        height: 19.5px; /* 26px * 0.75 = 19.5px */
+        width: 19.5px; /* 26px * 0.75 = 19.5px */
+        left: 3px; /* Ajustement proportionnel de la position */
+        bottom: 3px; /* Ajustement proportionnel de la position */
+    }
+
+    input:checked+.slider:before {
+        transform: translateX(19.5px); /* Nouvelle largeur du cercle */
+    }
+}
+
+/* Scrollbar stylée pour la sidebar */
+.sidebar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 0, 0.6);
+}
+
+/* Firefox scrollbar */
+.sidebar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.4) transparent;
+}
+
+.overlay-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* pour que ça ne bloque pas les clics */
+    z-index: 9999;
+}
